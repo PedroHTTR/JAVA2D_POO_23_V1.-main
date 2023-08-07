@@ -1,36 +1,36 @@
 package br.ifpr.jogo.modelos;
+
 import java.awt.Image;
-
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
-
-import javafx.scene.input.KeyEvent;
 
 public class Personagem{
     private int posicaoEmX;
     private int posicaoEmY;
     private int deslocamentoEmX;
     private int deslocamentoEmY;
-    private Image imagem;
+    private Image imagemPersonagem;
     private int larguraImagem;
     private int alturaImagem;
-    private static final int DESLOCAMENTO = 3;
-    private static final int POSIINIX = 100;
-    private static final int POSIINIY = 100;
+    private ArrayList<Tiro> tiros;
 
+    private static final int POSICAO_INICIAL_X = 100;
+    private static final int POSICAO_INICIAL_Y = 100;
+    private static final int VELOCIDADE_DESLOCAMENTO =3;
 
 
     public Personagem(){
-        this.posicaoEmX = 100;
-        this.posicaoEmY = 100;
-        this.posicaoEmX = POSIINIX;
-        this.posicaoEmY = POSIINIY;
+        this.posicaoEmX = POSICAO_INICIAL_X;
+        this.posicaoEmY = POSICAO_INICIAL_Y;
+        this.tiros = new ArrayList<Tiro>();
     }
 
     public void carregar(){
-        ImageIcon carregando = new ImageIcon("recursos\\nave.png");
-        this.imagem = carregando.getImage();
-        this.alturaImagem = this.imagem.getHeight(null);
-        this.larguraImagem = this.imagem.getWidth(null);
+        ImageIcon carregando = new ImageIcon("JAVA2D_POO_23.-main\\recursos\\nave.png");
+        this.imagemPersonagem = carregando.getImage();
+        this.alturaImagem = this.imagemPersonagem.getHeight(null);
+        this.larguraImagem = this.imagemPersonagem.getWidth(null);
     }
     
     public void atualizar() {
@@ -42,16 +42,16 @@ public class Personagem{
     int codigo = tecla.getKeyCode();
     switch (codigo) {
         case KeyEvent.VK_UP:
-            this.deslocamentoEmY = -DESLOCAMENTO;
+            this.deslocamentoEmY = -VELOCIDADE_DESLOCAMENTO;
             break;
         case KeyEvent.VK_DOWN:
-            this.deslocamentoEmY = DESLOCAMENTO;
+            this.deslocamentoEmY = VELOCIDADE_DESLOCAMENTO;
             break;
         case KeyEvent.VK_LEFT:
-            this.deslocamentoEmX = -DESLOCAMENTO;
+            this.deslocamentoEmX = -VELOCIDADE_DESLOCAMENTO;
             break;
         case KeyEvent.VK_RIGHT:
-            this.deslocamentoEmX = DESLOCAMENTO;
+            this.deslocamentoEmX = VELOCIDADE_DESLOCAMENTO;
             break;
         default:
             break;
@@ -75,8 +75,14 @@ public class Personagem{
             break;
         default:
             break;
+    }    }
+
+    public void atirar(){
+        int frenteNave = this.posicaoEmX + this.larguraImagem;
+        int meioNave = this.posicaoEmY + (this.larguraImagem/2);
+        Tiro tiro = new Tiro(frenteNave, meioNave);
+        this.tiros.add(tiro);
     }
-}
 
     public int getPosicaoEmX() {
         return this.posicaoEmX;
@@ -111,11 +117,11 @@ public class Personagem{
     }
 
     public Image getImagem() {
-        return this.imagem;
+        return this.imagemPersonagem;
     }
 
     public void setImagem(Image imagem) {
-        this.imagem = imagem;
+        this.imagemPersonagem = imagem;
     }
 
     public int getLarguraImagem() {
@@ -133,4 +139,21 @@ public class Personagem{
     public void setAlturaImagem(int alturaImagem) {
         this.alturaImagem = alturaImagem;
     }
+
+    public ArrayList<Tiro> getTiros() {
+        return this.tiros;
+    }
+
+    public void setTiros(ArrayList<Tiro> tiros) {
+        this.tiros = tiros;
+    }
+    
+    public Image getImagemPersonagem() {
+        return this.imagemPersonagem;
+    }
+
+    public void setImagemPersonagem(Image imagemPersonagem) {
+        this.imagemPersonagem = imagemPersonagem;
+    }
+  
 }

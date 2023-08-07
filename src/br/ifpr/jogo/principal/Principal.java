@@ -11,7 +11,8 @@ public class Principal extends JFrame{
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         super.setLocationRelativeTo(null); 
         super.setResizable(true); 
-        super.setVisible(true);          
+        super.setVisible(true); 
+                 
     }
   
     public static void main(String[] args){
